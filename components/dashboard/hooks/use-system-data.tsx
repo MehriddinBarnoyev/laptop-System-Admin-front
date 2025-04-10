@@ -41,7 +41,7 @@ export function useSystemData() {
     fetchSystemStats()
 
     // Set up polling every 5 seconds
-    const interval = setInterval(fetchSystemStats, 5000)
+    const interval = setInterval(fetchSystemStats, 50000)
 
     return () => clearInterval(interval)
   }, [])
@@ -67,13 +67,13 @@ export function useSystemData() {
   // Security level - this would typically come from a security monitoring service
   const securityLevel = fallbackSecurityLevel
 
-  console.log("Processed system data:", {
-    cpuUsage,
-    memoryUsage,
-    networkStatus,
-    systemStatus,
-    lastFetchTime: lastFetchTime?.toISOString(),
-  })
+  // console.log("Processed system data:", {
+  //   cpuUsage,
+  //   memoryUsage,
+  //   networkStatus,
+  //   systemStatus,
+  //   lastFetchTime: lastFetchTime?.toISOString(),
+  // })
 
   return {
     systemStatus,

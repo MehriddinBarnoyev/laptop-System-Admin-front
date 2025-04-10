@@ -33,13 +33,13 @@ export default function Dashboard() {
   const { isLoading: initialLoading } = useLoading(2000)
   const isLoading = initialLoading || apiLoading
 
-  console.log("Dashboard component rendering with data:", {
-    cpuUsage,
-    memoryUsage,
-    networkStatus,
-    hasRawData: !!rawData,
-    lastFetchTime: lastFetchTime?.toISOString(),
-  })
+  // console.log("Dashboard component rendering with data:", {
+  //   cpuUsage,
+  //   memoryUsage,
+  //   networkStatus,
+  //   hasRawData: !!rawData,
+  //   lastFetchTime: lastFetchTime?.toISOString(),
+  // })
 
   return (
     <SidebarProvider>

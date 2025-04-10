@@ -1,13 +1,28 @@
 "use client"
 
-import { Bell, Hexagon, Moon, Search, Sun } from "lucide-react"
+import { Bell, Hexagon, LogOut, Moon, Search, Sun } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { useDashboard } from "@/components/dashboard/context/dashboard-context"
-
+import { useAuth } from "@/components/auth/auth-provider"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { useRouter } from "next/navigation"
 export default function Header() {
+
+  const router = useRouter()
   const { theme, toggleTheme } = useDashboard()
+  const { user, logout } = useAuth()
+  const handleClick = () => {
+    router.push("/profile")
+  }
 
   return (
     <header className="flex items-center justify-between py-4 border-b border-slate-700/50 mb-6">
@@ -61,10 +76,34 @@ export default function Header() {
             </Tooltip>
           </TooltipProvider>
 
-          <Avatar>
-            <AvatarImage src="/placeholder.svg?height=40&width=40" alt="User" />
-            <AvatarFallback className="bg-slate-700 text-cyan-500">CM</AvatarFallback>
-          </Avatar>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Avatar className="cursor-pointer">
+                <AvatarImage src="/placeholder.svg?height=40&width=40" alt={user?.username || "User"} />
+                <AvatarFallback className="bg-slate-700 text-cyan-500">
+                  {user?.username?.charAt(0).toUpperCase() || "U"}
+                </AvatarFallback>
+              </Avatar>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56 bg-slate-800 border-slate-700 text-slate-300">
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator className="bg-slate-700" />
+              <DropdownMenuItem className="focus:bg-slate-700 focus:text-slate-100 cursor-pointer" onClick={handleClick}>
+                Profile
+              </DropdownMenuItem>
+              <DropdownMenuItem className="focus:bg-slate-700 focus:text-slate-100 cursor-pointer">
+                Settings
+              </DropdownMenuItem>
+              <DropdownMenuSeparator className="bg-slate-700" />
+              <DropdownMenuItem
+                className="focus:bg-slate-700 focus:text-slate-100 cursor-pointer text-red-400 focus:text-red-300"
+                onClick={logout}
+              >
+                <LogOut className="mr-2 h-4 w-4" />
+                <span>Log out</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
     </header>

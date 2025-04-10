@@ -1,5 +1,6 @@
 import type React from "react"
 import "./globals.css"
+import { AuthProvider } from "@/components/auth/auth-provider"
 
 export default function RootLayout({
   children,
@@ -8,15 +9,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body suppressHydrationWarning>
+        <AuthProvider>{children}</AuthProvider>
+      </body>
     </html>
   )
 }
 
-
-
-import './globals.css'
-
-export const metadata = {
-      generator: 'v0.dev'
-    };

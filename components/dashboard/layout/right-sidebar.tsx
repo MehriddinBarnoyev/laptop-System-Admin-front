@@ -15,7 +15,7 @@ export default function RightSidebar() {
   // Calculate uptime in days, hours, minutes, seconds if available
   const uptime = rawData?.uptime ? formatUptime(rawData.uptime) : "14d 06:42:18"
 
-  console.log("RightSidebar rendering with uptime:", uptime)
+  // console.log("RightSidebar rendering with uptime:", uptime)
 
   return (
     <div className="col-span-12 lg:col-span-3">
